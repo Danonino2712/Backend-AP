@@ -4,6 +4,8 @@ import com.backend.porfolio.entity.InfoFooter;
 import com.backend.porfolio.service.SInfoFooter;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,17 +36,17 @@ public class CInfoFooter {
         return infoServ.buscarInfo(id);
     }
     
+    @GetMapping("/detalle/{id}")
+    public ResponseEntity<InfoFooter> getById(@PathVariable("id") int id) {
+       InfoFooter info = SInfoFooter.getOne(id);
+       return new ResponseEntity(info, HttpStatus.OK);
+    }
+    
     @PostMapping ("/crear")
     public String agregarInfo (@RequestBody InfoFooter info){
         infoServ.crearInfo(info);
         return "La información del footer fue creada correctamente";
     }
-    
-    @DeleteMapping ("/borrar/{id}")
-    public String eliminarInfo(@PathVariable int id) {
-        infoServ.borrarInfo(id);
-        return "La información del footer fue eliminada correctamente";
-    } 
     
     //otra forma de editar persona 
         @PutMapping("/editar/{id}")
@@ -52,5 +54,11 @@ public class CInfoFooter {
         info.setId(id);
         infoServ.editarInfo(info);
         return "La información del footer fue editada correctamente";
+    }
+    
+        @DeleteMapping ("/borrar/{id}")
+    public String eliminarInfo(@PathVariable int id) {
+        infoServ.borrarInfo(id);
+        return "La información del footer fue eliminada correctamente";
     }
 }

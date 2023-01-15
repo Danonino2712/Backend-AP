@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 public class SRedSocial {
+
+    public static RedSocial getOne(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
      @Autowired 
     public RRedSocial repoRedes;
     

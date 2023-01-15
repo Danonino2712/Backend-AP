@@ -4,6 +4,8 @@ import com.backend.porfolio.entity.Persona;
 import com.backend.porfolio.service.SPersona;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,17 +36,17 @@ public class CPersona {
         return servPerson.buscarPersona(id);
     }
     
+     @GetMapping("/detalle/{id}")
+    public ResponseEntity<Persona> getById(@PathVariable("id") int id) {
+       Persona pers = SPersona.getOne(id);
+       return new ResponseEntity(pers, HttpStatus.OK);
+    }
+    
     @PostMapping ("/crear")
     public String agregarPersona (@RequestBody Persona pers){
         servPerson.crearPersona(pers);
         return "La persona fue creada correctamente";
     }
-    
-    @DeleteMapping ("/borrar/{id}")
-    public String eliminarPersona(@PathVariable int id) {
-        servPerson.borrarPersona(id);
-        return "La persona fue eliminada correctamente";
-    } 
     
     //otra forma de editar persona
     @PutMapping("/editar/{id}")
@@ -53,4 +55,10 @@ public class CPersona {
         servPerson.editarPersona(pers);
         return "La persona fue editada correctamente";
     }
+    
+        @DeleteMapping ("/borrar/{id}")
+    public String eliminarPersona(@PathVariable int id) {
+        servPerson.borrarPersona(id);
+        return "La persona fue eliminada correctamente";
+    } 
 }

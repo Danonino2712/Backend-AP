@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 public class SPersona {
+
+    public static Persona getOne(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     @Autowired 
     public RPersona repoPers;
     

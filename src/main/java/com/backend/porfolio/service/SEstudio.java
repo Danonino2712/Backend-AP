@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 public class SEstudio {
+
+    public static Estudio getOne(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     @Autowired 
     public REstudio RepoStudies;
     

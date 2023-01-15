@@ -4,6 +4,8 @@ import com.backend.porfolio.entity.RedSocial;
 import com.backend.porfolio.service.SRedSocial;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,17 +36,17 @@ public class CRedSocial {
         return servRedes.buscarRed(id);
     }
     
+     @GetMapping("/detalle/{id}")
+    public ResponseEntity<RedSocial> getById(@PathVariable("id") int id) {
+       RedSocial red = SRedSocial.getOne(id);
+       return new ResponseEntity(red, HttpStatus.OK);
+    }
+    
     @PostMapping ("/crear")
     public String agregarRed (@RequestBody RedSocial red){
         servRedes.crearRed(red);
         return "La red social fue creada correctamente";
     }
-    
-    @DeleteMapping ("/borrar/{id}")
-    public String eliminarRed(@PathVariable int id) {
-        servRedes.borrarRed(id);
-        return "La red social fue eliminada correctamente";
-    } 
     
     //otra forma de editar persona
         @PutMapping("/editar/{id}")
@@ -53,4 +55,10 @@ public class CRedSocial {
         servRedes.editarRed(red);
         return "La red social fue editada correctamente";
     }
+        
+    @DeleteMapping ("/borrar/{id}")
+    public String eliminarRed(@PathVariable int id) {
+        servRedes.borrarRed(id);
+        return "La red social fue eliminada correctamente";
+    } 
 }

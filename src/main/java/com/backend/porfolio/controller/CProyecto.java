@@ -4,6 +4,8 @@ import com.backend.porfolio.entity.Proyecto;
 import com.backend.porfolio.service.SProyecto;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +34,12 @@ public class CProyecto {
     @ResponseBody
     public Proyecto buscarProyectos(@PathVariable int id) {
         return servPro.buscarProyecto(id);
+    }
+    
+         @GetMapping("/detalle/{id}")
+    public ResponseEntity<Proyecto> getById(@PathVariable("id") int id) {
+       Proyecto pro = SProyecto.getOne(id);
+       return new ResponseEntity(pro, HttpStatus.OK);
     }
     
     @PostMapping ("/crear")

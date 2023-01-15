@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 public class SInfoFooter {
+
+    public static InfoFooter getOne(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
      @Autowired 
     public RInfoFooter RepoFooter;
     

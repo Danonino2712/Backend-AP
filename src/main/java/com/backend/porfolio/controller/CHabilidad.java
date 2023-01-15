@@ -4,6 +4,8 @@ import com.backend.porfolio.entity.Habilidad;
 import com.backend.porfolio.service.SHabilidad;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,17 +36,17 @@ public class CHabilidad {
         return servSkill.buscarHabilidad(id);
     }
     
+    @GetMapping("/detalle/{id}")
+    public ResponseEntity<Habilidad> getById(@PathVariable("id") int id) {
+       Habilidad skill = SHabilidad.getOne(id);
+       return new ResponseEntity(skill, HttpStatus.OK);
+    }
+    
     @PostMapping ("/crear")
     public String agregarHabilidad (@RequestBody Habilidad skill){
         servSkill.crearHabilidad(skill);
         return "La habilidad fue creada correctamente";
     }
-    
-    @DeleteMapping ("/borrar/{id}")
-    public String eliminarHabilidad(@PathVariable int id) {
-        servSkill.borrarHabilidad(id);
-        return "La habilidad fue eliminada correctamente";
-    } 
     
     //otra forma de editar persona 
     @PutMapping("/editar/{id}")
@@ -53,4 +55,10 @@ public class CHabilidad {
         servSkill.editarHabilidad(skill);
         return "La habilidad fue editada correctamente";
     }
+        
+    @DeleteMapping ("/borrar/{id}")
+    public String eliminarHabilidad(@PathVariable int id) {
+        servSkill.borrarHabilidad(id);
+        return "La habilidad fue eliminada correctamente";
+    } 
 }
